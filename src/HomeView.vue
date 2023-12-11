@@ -7,7 +7,7 @@
                     <Selector @orden-seleccionado="ordenSeleccionado" />
                 </div>
                 <div class="col-12 col-md-6 mb-3">
-                    <Buscador />
+                    <Buscador @buscar-personaje="searchPersonaje" />
                 </div>
             </div>
         </div>
@@ -15,7 +15,13 @@
             <Paginado @prev-page="prevPage" @next-page="nextPage" />
         </nav>
         <div class="container mt-5">
-            <div class="row">
+            <div
+                class="mensaje-busqueda"
+                v-if="personajesMostrados.length === 0"
+            >
+                No se encontro el personaje "{{ busquedaActual }}"
+            </div>
+            <div v-else class="row">
                 <div
                     class="col-12 col-sm-6 col-md-4 col-lg-3"
                     v-for="item in personajesMostrados"
@@ -45,6 +51,7 @@ export default {
     data() {
         return {
             ordenActual: null,
+            busquedaActual: null,
         };
     },
     mounted() {
@@ -53,12 +60,20 @@ export default {
 
     computed: {
         ...mapGetters(["getPersonajes", "getSortedPersonajes"]),
-//Si ordenActual es true, devuelve getSortedPersonajes, si no, devuelve getPersonajes
-//Si no hay orden, devuelve getPersonajes (por defecto)
+        //Si ordenActual es true, devuelve getSortedPersonajes, si no, devuelve getPersonajes
+        //Si no hay orden, devuelve getPersonajes (por defecto)
         personajesMostrados() {
-            return this.ordenActual
+            let personajes = this.ordenActual
                 ? this.getSortedPersonajes(this.ordenActual)
                 : this.getPersonajes;
+            if (this.busquedaActual && this.busquedaActual.trim() !== "") {
+                personajes = personajes.filter((item) => {
+                    return item.name
+                        .toLowerCase()
+                        .includes(this.busquedaActual.toLowerCase());
+                });
+            }
+            return personajes;
         },
     },
     methods: {
@@ -66,8 +81,26 @@ export default {
         ordenSeleccionado(orden) {
             this.ordenActual = orden;
         },
+        searchPersonaje(busqueda) {
+            if (!busqueda || busqueda.trim() === "") {
+                alert("Debes ingresar un personaje a buscar");
+                return;
+            }
+            this.busquedaActual = busqueda;
+        },
     },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+.mensaje-busqueda {
+    text-align: center;
+    color: #eceaea;
+    font-size: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+</style>

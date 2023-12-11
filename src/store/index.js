@@ -5,7 +5,8 @@ export default createStore({
     state: {
         personajes: [],
         personaje: {},
-        paginadoInfo: {}
+        paginadoInfo: {},
+        loading: false,
     },
     getters: {
         getPersonajes(state) {
@@ -14,7 +15,7 @@ export default createStore({
         getPersonaje(state) {
             return state.personaje;
         },
-        getSortedPersonajes: (state) =>(orden)=> {
+        getSortedPersonajes: (state) => (orden) => {
             //Copiamos el array de personajes
             let personajesOrdenados = [...state.personajes]
             switch (orden) {
@@ -38,10 +39,14 @@ export default createStore({
         setPaginadoInfo(state, payload) {
             state.paginadoInfo = payload;
         },
+        setLoading(state, payload) {
+            state.loading = payload;
+        },
     },
     actions: {
         async getCharactersAndPagination({ commit }, url) {
             try {
+                commit('setLoading', true)
                 const response = await api.get(url)
                 const dataCharacteres = response.data.results
                 const dataPagination = response.data.info
@@ -51,6 +56,12 @@ export default createStore({
                 commit('setPaginadoInfo', dataPagination)
             } catch (error) {
                 console.log(error)
+                return error;
+            } finally {
+                setTimeout(() => {
+                    commit('setLoading', false);
+                }, 1500)
+                console.log('Finalizada la carga de personajes');
             }
         },
         async nextPage({ state, dispatch }) {

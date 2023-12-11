@@ -1,6 +1,6 @@
 <template>
-    <form className="d-flex mb-3">
-        <input type="text" placeholder="Search...personaje" class="form-control me-2" />
+    <form @submit.prevent ="buscarPersonaje" className="d-flex mb-3">
+        <input v-model="searchPersonaje" type="text" placeholder="Search...personaje" class="form-control me-2" />
         <button class="btn btn-warning text-white" type="submit">Search</button>
     </form>
 </template>
@@ -10,9 +10,15 @@ export default {
     name: "Buscador",
     components: {},
     data() {
-        return {};
+        return {
+            searchPersonaje: "",
+        };
     },
-    methods: {},
+    methods: {
+        buscarPersonaje() {
+            this.$emit("buscarPersonaje", this.searchPersonaje);
+        },
+    },
 };
 </script>
 
