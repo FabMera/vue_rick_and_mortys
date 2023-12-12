@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent ="buscarPersonaje" className="d-flex mb-3">
         <input v-model="searchPersonaje" type="text" placeholder="Search...personaje" class="form-control me-2" />
-        <button class="btn btn-warning text-white" type="submit">Search</button>
+        <button class="btn btn-info text-white" type="submit">Search</button>
     </form>
 </template>
 

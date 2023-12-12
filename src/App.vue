@@ -23,7 +23,7 @@ export default {
 
 <style>
 body {
-    background-color: rgb(88, 138, 195);
+    background-color: rgb(208, 210, 212);
 }
 .loading-modal {
     position: fixed; /* Posiciona el elemento de manera absoluta respecto a la ventana */

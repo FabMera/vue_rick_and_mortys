@@ -39,6 +39,5 @@ export default {
 .card {
     min-height: 480px;
     max-height: 480px;
-    overflow: auto;
 }
 </style>

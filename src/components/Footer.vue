@@ -1,9 +1,9 @@
 <template>
-    <nav class="navbar navbar-dark bg-info">
-        <div class="container-fluid justify-content-center">
+    <footer>
+        <div class="container-fluid text-center">
             <a class="navbar-brand " href="#">--Fabian Mera 2023--</a>
         </div>
-    </nav>
+    </footer>
 </template>
 
 <script>
@@ -17,4 +17,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+
+footer{
+    background-color: #333; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding: 10px 15px; 
+    background: linear-gradient(to right, #333, #666);
+    color: #fff;
+}
+
+</style>
+

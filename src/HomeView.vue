@@ -1,8 +1,8 @@
 <template>
     <div>
         <nav-bar />
-        <div class="container mt-4 d-flex flex-row justify-content-around">
-            <div class="row">
+        <div class="container mt-5 d-flex flex-row justify-content-around">
+            <div class="row mt-5">
                 <div class="col-12 col-md-6 mb-3">
                     <Selector @orden-seleccionado="ordenSeleccionado" />
                 </div>
