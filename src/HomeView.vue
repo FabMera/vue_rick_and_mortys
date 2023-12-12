@@ -19,7 +19,7 @@
                 class="mensaje-busqueda"
                 v-if="personajesMostrados.length === 0"
             >
-                No se encontro el personaje "{{ busquedaActual }}"
+                No se encontró el personaje "{{ busquedaActual }}"
             </div>
             <div v-else class="row">
                 <div
@@ -129,12 +129,12 @@ export default {
 <style lang="css" scoped>
 .mensaje-busqueda {
     text-align: center;
-    color: #eceaea;
+    color: rgb(0, 0, 0);
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 2em;
     padding: 1em;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(91, 141, 156);
     border-radius: 5px;
 }
 .overlay {
