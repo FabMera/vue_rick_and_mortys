@@ -1,15 +1,14 @@
 <template>
-    <div className="row justify-content-center ">
+    <div @click="clickPersonaje" className="row justify-content-center">
         <div class="mb-4" style="width: 18rem">
             <div class="card border-info d-flex flex-column h-100">
-                <span v-if="item.status === 'Alive'" class="badge bg-success">{{
+                <span v-if="item.status === 'Alive'" class="bg-success rounded-top text-center text-white">{{
                     item.status
                 }}</span>
-                <span v-else class="badge bg-danger">{{ item.status }}</span>
+                <span v-else class="bg-danger rounded-top text-center text-white">{{ item.status }}</span>
                 <img :src="item.image" alt="" />
                 <div class="card-body mt-auto">
                     <h5 class="card-tittle">{{ item.name }}</h5>
-                    <hr />
                     <p>Especie: {{ item.species }}</p>
                     <p>Ubicacion: {{ item.location.name }}</p>
                 </div>
@@ -31,7 +30,11 @@ export default {
     data() {
         return {};
     },
-    methods: {},
+    methods: {
+        clickPersonaje() {
+            this.$emit("clickPersonaje", this.item.id);
+        },
+    },
 };
 </script>
 
@@ -39,5 +42,6 @@ export default {
 .card {
     min-height: 480px;
     max-height: 480px;
+    cursor: pointer;
 }
 </style>

@@ -80,6 +80,19 @@ export default createStore({
                 }
             }
         },
+        async getCharacter({ commit }, id) {
+            try {
+                const response = await api.get(`/${id}`)
+                const dataCharacter = response.data
+                console.log(dataCharacter)
+                commit('setPersonaje', dataCharacter)
+            } catch (error) {
+                console.log(error)
+                return error;
+            } finally {
+                console.log('Finalizada la carga del personaje');
+            }
+        },
     },
     modules: {
     }
